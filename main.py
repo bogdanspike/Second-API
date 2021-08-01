@@ -1,7 +1,9 @@
+from pprint import pprint
+
 from flask import Flask, request
 from flask_restful import Resource, Api
-from pprint import pprint
-from Base_model import session, File, Base
+
+from Base_model import session, File
 
 app = Flask(__name__)
 api = Api(app)
@@ -25,8 +27,6 @@ class Upload(Resource):
             pprint('Error occured!')
 
 
-
-
 class DeleteFile(Resource):
     def get(self):
         return 'Same goes for this one but on Delete route.'
@@ -40,7 +40,6 @@ class DeleteFile(Resource):
             print('Error occured!')
 
 
-
 class Update(Resource):
     def get(self):
         return 'And another one on Update route.'
@@ -49,12 +48,11 @@ class Update(Resource):
         given_id = request.form.get('id')
         updated_file = request.form.get('text')
         try:
-                updating = session.query(File).get(given_id)
-                updating.file_text = updated_file
-                session.commit()
+            updating = session.query(File).get(given_id)
+            updating.file_text = updated_file
+            session.commit()
         except:
             print('Error occured!')
-
 
 
 api.add_resource(Upload, '/upload-file')
