@@ -55,9 +55,14 @@ class Update(Resource):
             print('Error occured!')
 
 
+class Home(Resource):
+    def get(self):
+        return 'Hello world!'
+
+api.add_resource(Home, '/')
 api.add_resource(Upload, '/upload-file')
 api.add_resource(DeleteFile, '/delete-file')
 api.add_resource(Update, '/update-file-text')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
